@@ -39,7 +39,7 @@ pipeline {
                 . venv/bin/activate
         
                 # Install required Python packages
-                pip install docker crowdstrike-falconpy
+                pip install docker crowdstrike-falconpy retry
         
                 # Run the scan script using the virtual environment
                 python3 container-image-scan/cs_scanimage.py
