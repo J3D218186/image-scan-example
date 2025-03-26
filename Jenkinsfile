@@ -7,7 +7,7 @@ pipeline {
         FALCON_CLIENT_SECRET = credentials('FALCON_CLIENT_SECRET')
         FALCON_CLIENT_ID = credentials('FALCON_CLIENT_ID')
         BUILD_DIR = '.'
-        CONTAINER_REPO = 'https://github.com/J3D218186/image-scan-example.git'
+        CONTAINER_REPO = 'maleakhiek/image-scan-example'
         CONTAINER_TAG = "${BUILD_NUMBER}"
         FALCON_CLOUD_REGION = 'us-2'
         //SCORE = 500
