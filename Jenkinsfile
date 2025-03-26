@@ -22,17 +22,30 @@ pipeline {
         }
         stage('ScanImage') {
             // Scan the image using Falcon ImageScan API
-            steps{
+            steps {
                 sh '''
-                if [ ! -d container-image-scan ] ; then
+                if [ ! -d container-image-scan ]; then
                     git clone https://github.com/crowdstrike/container-image-scan
                 fi
-                apt install -y python3-pip python3-docker
-                apt install -y python3-pip python3-falconpy
+        
+                # Update package list and install necessary packages
+                apt update && apt install -y python3-pip python3-venv pipx
+        
+                # Ensure pipx is set up correctly
+                export PATH=$PATH:/root/.local/bin
+        
+                # Create and activate a virtual environment
+                python3 -m venv venv
+                . venv/bin/activate
+        
+                # Install required Python packages
+                pip install docker crowdstrike-falconpy
+        
+                # Run the scan script using the virtual environment
                 python3 container-image-scan/cs_scanimage.py
                 '''
             }
-        }  
+        }
         stage('PushImage') {
             // Push the container image
             steps{
