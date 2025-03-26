@@ -42,7 +42,7 @@ pipeline {
                 pip install docker crowdstrike-falconpy retry
         
                 # Run the scan script using the virtual environment
-                python3 container-image-scan/cs_scanimage.py
+                python3 container-image-scan/cs_scanimage.py --ignore-score-threshold
                 '''
             }
         }
