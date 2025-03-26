@@ -28,6 +28,7 @@ pipeline {
                     git clone https://github.com/crowdstrike/container-image-scan
                 fi
                 apt install -y python3-pip python3-docker
+                apt install -y python3-pip python3-falconpy
                 python3 container-image-scan/cs_scanimage.py
                 '''
             }
