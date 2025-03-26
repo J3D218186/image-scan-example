@@ -27,7 +27,6 @@ pipeline {
                 if [ ! -d container-image-scan ] ; then
                     git clone https://github.com/crowdstrike/container-image-scan
                 fi
-                pip3 install docker crowdstrike-falconpy
                 pipx install docker
                 pipx install crowdstrike-falconpy
                 python3 container-image-scan/cs_scanimage.py
