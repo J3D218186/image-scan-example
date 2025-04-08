@@ -4,8 +4,8 @@ pipeline {
     
     environment {
         // Replace the <tags> below with your values.
-        FALCON_CLIENT_SECRET = credentials('FALCON_CLIENT_SECRET')
-        FALCON_CLIENT_ID = credentials('FALCON_CLIENT_ID')
+        FALCON_CLIENT_SECRET = 'c7612PO4Zgb3nuEDveYIBAxVqwX9Rl0NT58saKyL'
+        FALCON_CLIENT_ID = 'e4f52a2f8e074f6e9dee45c2ffbfdca9'
         BUILD_DIR = '.'
         CONTAINER_REPO = 'yasoniayp/image-scan-example'
         CONTAINER_TAG = "${BUILD_NUMBER}"
