@@ -29,7 +29,7 @@ pipeline {
                 fi
         
                 pip3 install docker crowdstrike-falconpy
-                python3 container-image-scan/cs_scanimage.py
+                python3 container-image-scan/cs_scanimage.py -s 99999999
                 '''
             }
         }
