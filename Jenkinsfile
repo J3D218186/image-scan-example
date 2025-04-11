@@ -3,8 +3,8 @@ pipeline {
     agent any
     
     environment {
-        FALCON_CLIENT_SECRET = credentials('FALCON_CLIENT_SECRET')
-        FALCON_CLIENT_ID = credentials('FALCON_CLIENT_ID')
+        FALCON_CLIENT_SECRET = 'kvGqbtA9fECNPRHg8WZi56dSo0Lmpsn734hc1j2Y'
+        FALCON_CLIENT_ID = 'e4f52a2f8e074f6e9dee45c2ffbfdca9'
         BUILD_DIR = '.'
         CONTAINER_REPO = 'yasoniayp/image-scan-example'
         CONTAINER_TAG = "${BUILD_NUMBER}"
