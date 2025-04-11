@@ -3,7 +3,7 @@ pipeline {
     agent any
     
     environment {
-        FALCON_CLIENT_SECRET = 'kvGqbtA9fECNPRHg8WZi56dSo0Lmpsn734hc1j2Y'
+        FALCON_CLIENT_SECRET = 'M5p1Ry3eJkdB20qcAL47lPDxTW9hKYowzi86IatV'
         FALCON_CLIENT_ID = 'e4f52a2f8e074f6e9dee45c2ffbfdca9'
         BUILD_DIR = '.'
         CONTAINER_REPO = 'yasoniayp/image-scan-example'
