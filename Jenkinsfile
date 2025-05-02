@@ -28,10 +28,9 @@ pipeline {
         // }
         stage('ScanImage') {
           steps {
-            crowdStrikeSecurity credentialsId: 'FALCON_CRED_ID',
-                                imageName: "${CONTAINER_REPO}",
+            echo "Scanning image: ${CONTAINER_REPO}:${CONTAINER_TAG}"
+            crowdStrikeSecurity imageName: "${CONTAINER_REPO}",
                                 imageTag: "${CONTAINER_TAG}",
-                                cloudRegion: "${FALCON_CLOUD_REGION}",
                                 enforce: true,
                                 timeout: 60
           }
