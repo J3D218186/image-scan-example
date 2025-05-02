@@ -18,12 +18,22 @@ pipeline {
                 sh "docker build -t $CONTAINER_REPO:$CONTAINER_TAG $BUILD_DIR"
             }
         }
+        // stage('ScanImage') {
+        //   steps {
+        //     withCredentials([usernameColonPassword(credentialsId: 'FALCON_CRED_ID', variable: 'FALCON_CREDENTIALS')]) {
+        //         crowdStrikeSecurity imageName: "${CONTAINER_REPO}", imageTag: "${CONTAINER_TAG}", enforce: true, timeout: 60
+
+        //     }
+        //   }
+        // }
         stage('ScanImage') {
           steps {
-            withCredentials([usernameColonPassword(credentialsId: 'FALCON_CRED_ID', variable: 'FALCON_CREDENTIALS')]) {
-                crowdStrikeSecurity imageName: "${CONTAINER_REPO}", imageTag: "${CONTAINER_TAG}", enforce: true, timeout: 60
-
-            }
+            crowdStrikeSecurity credentialsId: 'FALCON_CRED_ID',
+                                imageName: "${CONTAINER_REPO}",
+                                imageTag: "${CONTAINER_TAG}",
+                                cloudRegion: "${FALCON_CLOUD_REGION}",
+                                enforce: true,
+                                timeout: 60
           }
         }
         stage('PushImage') {
