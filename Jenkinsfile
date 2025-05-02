@@ -6,7 +6,6 @@ pipeline {
         FALCON_CLIENT_SECRET = credentials('FALCON_CLIENT_SECRET')
         FALCON_CLIENT_ID = credentials('FALCON_CLIENT_ID')
         BUILD_DIR = '.'
-        FALCON_CRED_ID = '39ea2ed0-9e4e-4449-bca5-d36f57f5b787'
         CONTAINER_REPO = 'yasoniayp/image-scan-example'
         CONTAINER_TAG = "${BUILD_NUMBER}"
         FALCON_CLOUD_REGION = 'us-2'   
@@ -21,7 +20,7 @@ pipeline {
         }
         stage('ScanImage') {
           steps {
-            withCredentials([usernameColonPassword(credentialsId: '$FALCON_CRED_ID', variable: '')]) {
+            withCredentials([usernameColonPassword(credentialsId: 'FALCON_CRED_ID', variable: '')]) {
               crowdStrikeSecurity imageName: '$CONTAINER_REPO', imageTag: '$CONTAINER_TAG', enforce: true, timeout: 60
             }
           }
