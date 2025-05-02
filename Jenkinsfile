@@ -20,7 +20,7 @@ pipeline {
         }
         // stage('ScanImage') {
         //   steps {
-        //     withCredentials([usernameColonPassword(credentialsId: 'FALCON_CRED_ID', variable: 'FALCON_CREDENTIALS')]) {
+        //     withCredentials([usernameColonPassword(credentialsId: 'FALCON_CREDS_ID', variable: 'FALCON_CREDENTIALS')]) {
         //         crowdStrikeSecurity imageName: "${CONTAINER_REPO}", imageTag: "${CONTAINER_TAG}", enforce: true, timeout: 60
 
         //     }
