@@ -18,23 +18,35 @@ pipeline {
                 sh "docker build -t $CONTAINER_REPO:$CONTAINER_TAG $BUILD_DIR"
             }
         }
+        stage('ScanImage') {
+            steps {
+                echo "Scanning image: ${CONTAINER_REPO}:${CONTAINER_TAG}"
+                script {
+                    def scanResponse = crowdStrikeSecurity(
+                        imageName: "${CONTAINER_REPO}",
+                        imageTag: "${CONTAINER_TAG}",
+                        enforce: true,
+                        timeout: 60
+                    )
+                    echo "Scan Result: ${scanResponse}"
+                    
+                    def criticalVulns = scanResponse.issues?.findAll { it.severity == 'Critical' }
+                    if (criticalVulns?.size() > 0) {
+                        error "Build failed due to Critical vulnerabilities found!"
+                    }
+                }
+            }
+        }
+
         // stage('ScanImage') {
         //   steps {
-        //     withCredentials([usernameColonPassword(credentialsId: 'FALCON_CREDS_ID', variable: 'FALCON_CREDENTIALS')]) {
-        //         crowdStrikeSecurity imageName: "${CONTAINER_REPO}", imageTag: "${CONTAINER_TAG}", enforce: true, timeout: 60
-
-        //     }
+        //     echo "Scanning image: ${CONTAINER_REPO}:${CONTAINER_TAG}"
+        //     crowdStrikeSecurity imageName: "${CONTAINER_REPO}",
+        //                         imageTag: "${CONTAINER_TAG}",
+        //                         enforce: true,
+        //                         timeout: 60
         //   }
         // }
-        stage('ScanImage') {
-          steps {
-            echo "Scanning image: ${CONTAINER_REPO}:${CONTAINER_TAG}"
-            crowdStrikeSecurity imageName: "${CONTAINER_REPO}",
-                                imageTag: "${CONTAINER_TAG}",
-                                enforce: true,
-                                timeout: 60
-          }
-        }
         stage('PushImage') {
             // Push the container image
             steps{
